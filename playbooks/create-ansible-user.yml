@@ -1,0 +1,24 @@
+- name: Create ansible user on target host
+  hosts: all
+  become: true
+  tasks:
+    - name: Ensure user 'ansiblebot' exists
+      ansible.builtin.user:
+        name: ansiblebot
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        state: present
+
+    - name: Add SSH key for 'ansiblebot'
+      ansible.builtin.authorized_key:
+        user: ansiblebot
+        key: "{{ lookup('file', '../ansible_node1hp_key.pub') }}"
+
+    - name: Allow paswordless sudo for 'ansiblebot'
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/ansiblebot
+        content: "ansiblebot ALL=(ALL) NOPASSWD:ALL\n"
+        owner: root
+        group: root
+        mode: '0440'
