@@ -1,0 +1,25 @@
+- name: Nginx www server configuration
+  hosts: hpnodes
+  become: True
+  tasks:
+    - name: Nginx Installation
+      package: name=nginx update_cache=yes
+      
+    - name: Copying nginx config file
+      copy:
+        src: nginx.conf
+        dest: /etc/nginx/sites-available/default
+
+    - name: Configuration
+      file: >
+        dest=/etc/nginx/sites-enabled/default
+        src=/etc/nginx/sites-available/default
+        state=link
+
+    - name: Copying index.html
+      template: >
+        src=index.html.j2
+        dest=/usr/share/nginx/html/index.html
+
+    - name: Nginx restart
+      service: name=nginx state=restarted
