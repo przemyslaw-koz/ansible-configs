@@ -8,6 +8,8 @@ RUN apt-get update && \
 
 RUN mkdir /var/run/sshd
 
+RUN mkdir -p /home/ansiblebot/.ssh
+
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
