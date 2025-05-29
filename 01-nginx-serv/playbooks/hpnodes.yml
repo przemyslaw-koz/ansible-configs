@@ -15,6 +15,7 @@
       ansible.builtin.copy:
         src: nginx.conf
         dest: /etc/nginx/sites-available/default
+        mode: '0644'
 
     - name: Configuration
       ansible.builtin.file:
@@ -26,6 +27,7 @@
       ansible.builtin.template:
         src: index.html.j2
         dest: /usr/share/nginx/html/index.html
+        mode: '0644'
 
     - name: Nginx restart
       ansible.builtin.service:
