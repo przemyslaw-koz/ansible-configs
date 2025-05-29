@@ -1,0 +1,34 @@
+name: Ansible CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  ansible-checks:
+    name: Ansible Lint & Syntax Check
+    runs_on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Ansible and ansible-lint
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install ansible ansible-lint
+
+      - name: Run ansible-lint on all playbooks
+        run: |
+          find . -name "*.yml" -exec ansible-lint {} +
+
+      - name: Run ansible-playbook syntax-check on all playbooks
+        run: |
+          find . -name "*.yml" -exec ansible-playbook --syntax-check {} +
