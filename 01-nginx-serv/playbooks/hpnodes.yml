@@ -8,7 +8,7 @@
   tasks:
     - name: Nginx Installation
       ansible.builtin.package:
-        name: nginx 
+        name: nginx
         update_cache: true
 
     - name: Copying nginx config file
