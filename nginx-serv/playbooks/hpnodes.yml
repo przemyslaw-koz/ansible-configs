@@ -1,7 +1,10 @@
 ---
 - name: Nginx www server configuration
   hosts: hpnodes
-  become: True
+  become: true
+  gather_facts: false
+
+
   tasks:
     - name: Nginx Installation
       package:
