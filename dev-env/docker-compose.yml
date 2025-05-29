@@ -29,4 +29,4 @@ services:
       context: .
       dockerfile: Dockerfile.ansible-node
     ports:
-      - "2223:33"
+      - "2223:22"
