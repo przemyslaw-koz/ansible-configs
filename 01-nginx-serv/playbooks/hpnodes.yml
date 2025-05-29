@@ -7,28 +7,28 @@
 
   tasks:
     - name: Nginx Installation
-      package:
+      ansible.builtin.package:
         name: nginx 
         update_cache: true
 
     - name: Copying nginx config file
-      copy:
+      ansible.builtin.copy:
         src: nginx.conf
         dest: /etc/nginx/sites-available/default
 
     - name: Configuration
-      file:
+      ansible.builtin.file:
         dest: /etc/nginx/sites-enabled/default
         src: /etc/nginx/sites-available/default
         state: link
 
     - name: Copying index.html
-      template:
+      ansible.builtin.template:
         src: index.html.j2
         dest: /usr/share/nginx/html/index.html
 
     - name: Nginx restart
-      service:
+      ansible.builtin.service:
         name: nginx
         state: restarted
 ...

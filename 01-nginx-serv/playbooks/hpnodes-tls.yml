@@ -28,14 +28,14 @@
       ansible.builtin.file:
         path: "{{ tls_dir }}"
         state: directory
-        mode: 0750
+        mode: '0750'
       notify: Restart Nginx
 
     - name: TLS files copy
       ansible.builtin.copy:
         src: "{{ item }}"
         dest: "{{ tls_dir }}"
-        mode: 0600
+        mode: '0600'
       loop:
         - "{{ key_file }}"
         - "{{ cert_file }}"
@@ -45,7 +45,7 @@
       ansible.builtin.template:
         src: nginx.conf.j2
         dest: "{{ conf_file }}"
-        mode: 0644
+        mode: '0644'
       notify: Restart Nginx
 
     - name: Configuration
@@ -58,15 +58,15 @@
       ansible.builtin.template:
         src: index.html.j2
         dest: /usr/share/nginx/html/index.html
-        mode: 0644
+        mode: '0644'
 
     - name: Restart Nginx
-      meta: flush_handlers
+      ansible.builtin.meta: flush_handlers
 
     - name: "Check it! 'https://localhost:443/index.html"
       delegate_to: localhost
       become: false
-      uri:
+      ansible.builtin.uri:
         url: 'https://192.168.1.19:8443/index.html'
         validate_certs: false
         return_content: true
