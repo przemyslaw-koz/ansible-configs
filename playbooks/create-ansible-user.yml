@@ -7,11 +7,11 @@
         name: ansiblebot
         shell: /bin/bash
         groups: sudo
-        append: yes
+        append: true
         state: present
 
     - name: Add SSH key for 'ansiblebot'
-      ansible.builtin.authorized_key:
+      ansible.posix.authorized_key:
         user: ansiblebot
         key: "{{ lookup('file', '../ansible_node1hp_key.pub') }}"
 

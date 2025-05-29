@@ -20,7 +20,7 @@
   tasks:
     - name: Nginx Installation
       ansible.builtin.package:
-        name: nginx 
+        name: nginx
         update_cache: true
       notify: Restart Nginx
 
