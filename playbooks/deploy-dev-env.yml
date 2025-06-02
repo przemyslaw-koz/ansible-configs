@@ -1,0 +1,31 @@
+- name: Deploy or update dev env
+  hosts: node1hp
+  become: true
+  tasks:
+    - name: Pull Repo
+      ansible.builtin.git:
+        repo: 'git@github.com:przemyslaw-koz/ansible-configs.git'
+        dest: /home/ansiblebot/projects/ansible-configs
+        version: main
+        update: yes
+
+    - name: Check if Dockerfile Changed
+      ansible.builtin.shell: |
+        git diff --name-only HEAD~1 HEAD | grep Dockerfile.ansible-node || true
+      args:
+        chdir: /home/ansiblebot/projects/ansible-configs
+      register: dockerfile_diff
+
+    - name: Rebuild Docker Image
+      ansible.builtin.shell: |
+        docker compose -f dev-env/docker-compose.yml build
+      args:
+        chdir: /home/ansiblebot/projects/ansible-configs/
+      when: dockerfile_diff.stdout != ""
+
+    - name: Restart Docker Compose
+      ansible.builtin.shell: |
+        docker compose -f dev-env/docker-compose.yml down && \
+        docker compose -f dev-env/docker-compose.yml up -d
+      args:
+        chdir: /home/ansiblebot/projects/ansible-configs
