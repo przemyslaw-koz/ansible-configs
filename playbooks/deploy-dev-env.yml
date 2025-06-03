@@ -24,6 +24,7 @@
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
       register: dockerfile_diff
+      changed_when: false
 
     - name: Rebuild Docker Image
       ansible.builtin.shell: |
@@ -32,9 +33,18 @@
         chdir: /home/ansiblebot/projects/ansible-configs/
       when: dockerfile_diff.stdout != ""
 
+    - name: Check if Docker Compose Changed
+      ansible.builtin.shell: |
+        git diff --name-only HEAD~1 HEAD | grep docker-compose.yml || true
+      args:
+        chdir: /home/ansiblebot/projects/ansible-configs
+      register: docker-compose_diff
+      changed_when: false
+
     - name: Restart Docker Compose
       ansible.builtin.shell: |
         docker compose -f dev-env/docker-compose.yml down && \
         docker compose -f dev-env/docker-compose.yml up -d
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
+      when: dockerfile_diff.stdout != "" or docker-compose_diff.stdout != ""
