@@ -47,4 +47,4 @@
         docker compose -f dev-env/docker-compose.yml up -d
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
-      when: dockerfile_diff.stdout != "" or docker-compose_diff.stdout != ""
+      when: dockerfile_diff.stdout != "" or dockercompose_diff.stdout != ""
