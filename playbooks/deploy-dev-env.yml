@@ -8,6 +8,7 @@
         dest: /home/ansiblebot/projects/ansible-configs
         version: main
         update: yes
+      become: false
 
     - name: Check if Dockerfile Changed
       ansible.builtin.shell: |
