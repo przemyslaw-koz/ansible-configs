@@ -2,6 +2,14 @@
   hosts: node1hp
   become: true
   tasks:
+    - name: Create folder for repo
+      ansible.builtin.file:
+        path: /home/ansiblebot/projects
+        state: directory
+        owner: ansiblebot
+        group: ansiblebot
+        mode: '0755'
+
     - name: Pull Repo
       ansible.builtin.git:
         repo: 'git@github.com:przemyslaw-koz/ansible-configs.git'
