@@ -20,6 +20,7 @@
 
     - name: Check if Dockerfile Changed
       ansible.builtin.shell: |
+        set -euo pipefail
         git diff --name-only HEAD~1 HEAD | grep Dockerfile.ansible-node || true
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
@@ -32,6 +33,7 @@
       args:
         chdir: /home/ansiblebot/projects/ansible-configs/
       when: dockerfile_diff.stdout != ""
+      changed_when: true
 
     - name: Check if Docker Compose Changed
       ansible.builtin.shell: |
