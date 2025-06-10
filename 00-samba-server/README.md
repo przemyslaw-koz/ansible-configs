@@ -65,8 +65,7 @@ This is a simple home-lab setup. I don’t run this playbook from CI/CD (e.g., G
 ├── inventory/
 │   └── hosts.ini
 ├── playbooks/
-│   ├── samba.yml
-│   └── test.yml
+│   └── samba.yml
 ├── host_vars/
 │   └── node1hp/
 │       └── vault.yml (encrypted)
