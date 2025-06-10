@@ -38,7 +38,7 @@
     - name: Check if Docker Compose Changed
       # noqa: command-instead-of-module
       ansible.builtin.shell: |
-        set -euo pipefall
+        set -euo pipefail
         git diff --name-only HEAD~1 HEAD | grep docker-compose.yml || true
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
@@ -47,7 +47,7 @@
 
     - name: Restart Docker Compose
       ansible.builtin.shell: |
-        set -euo pipefall
+        set -euo pipefail
         docker compose -f dev-env/docker-compose.yml down && \
         docker compose -f dev-env/docker-compose.yml up -d
       args:
