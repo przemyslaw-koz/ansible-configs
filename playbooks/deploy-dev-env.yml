@@ -45,8 +45,10 @@
 
     - name: Restart Docker Compose
       ansible.builtin.shell: |
+        set -euo pipefall
         docker compose -f dev-env/docker-compose.yml down && \
         docker compose -f dev-env/docker-compose.yml up -d
       args:
         chdir: /home/ansiblebot/projects/ansible-configs
       when: dockerfile_diff.stdout != "" or dockercompose_diff.stdout != ""
+      changed_when: true
