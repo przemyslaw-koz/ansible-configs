@@ -1,0 +1,31 @@
+- name: Running Docker Container with Samba Server on HP Thin Client
+  hosts: hpnodes
+  become: true
+  vars_files:
+    - ../group_vars/hpnodes/vault.yml
+  tasks:
+    - name: Load host-specific vault vars manually
+      ansible.builtin.include_vars:
+        file: "../host_vars/node1hp/vault.yml"
+        name: vault_vars
+
+    - name: Create share folder for Samba
+      ansible.builtin.file:
+        path: /srv/samba_share
+        state: directory
+        mode: "0777"
+
+    - name: Create Docker container with Samba
+      community.docker.docker_container:
+        name: samba
+        image: dperson/samba
+        restart_policy: unless-stopped
+        published_ports:
+          - "139:139"
+          - "445:445"
+        volumes:
+          - "/srv/samba_share:/mount"
+        command:
+          -u "{{ vault_vars.samba_user }};{{ vault_vars.samba_pass }}"
+          -s "share;/mount;yes;no;yes"
+
