@@ -15,7 +15,7 @@
         repo: 'git@github.com:przemyslaw-koz/ansible-configs.git'
         dest: /home/ansiblebot/projects/ansible-configs
         version: main
-        update: yes
+        update: true
       become: false
 
     - name: Check if Dockerfile Changed

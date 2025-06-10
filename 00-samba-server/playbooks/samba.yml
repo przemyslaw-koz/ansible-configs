@@ -28,4 +28,3 @@
         command:
           -u "{{ vault_vars.samba_user }};{{ vault_vars.samba_pass }}"
           -s "share;/mount;yes;no;yes"
-
