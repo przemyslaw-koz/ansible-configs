@@ -48,9 +48,13 @@ You’ll be prompted for the vault password.
   ```bash
   smbclient //node1hp/share -U your_username
   ```
-- From Windows: open the Run dialog (Win + R) and enter:
+- Or just mount it and use as catalog:
   ```bash
-  \\node1hp\share
+  sudo mount -t cifs //192.168.X.X/share ~/samba_share -o username=[username]
+  ```
+- From Windows: open the Windows Explorer and fill in the address:
+  ```bash
+  \\192.168.X.X\share
   ```
 
 ## Why Manual?
