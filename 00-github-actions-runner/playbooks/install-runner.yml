@@ -3,7 +3,7 @@
   become: true
   vars:
     github_repo: ""
-    github_runner_Version: ""
+    github_runner_version: ""
     github_runner_labels: ""
     github_runner_dir: "/home/ansiblebot/actions-runner"
     github_runner_checksum: "sha256:5020da7139d85c776059f351e0de8fdec753affc9c558e892472d43ebeb518f4"
@@ -13,6 +13,9 @@
       ansible.builtin.file:
         path: "{{ github_runner_dir }}"
         state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0755"
 
     - name: Download GitHub Actions Runner
       ansible.builtin.get_url:
