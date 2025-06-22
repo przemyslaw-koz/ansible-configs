@@ -22,6 +22,7 @@
         url: https://github.com/actions/runner/releases/download/v2.325.0/actions-runner-linux-x64-2.325.0.tar.gz
         dest: "{{ github_runner_dir }}/actions-runner-linux-x64-2.325.0.tar.gz"
         checksum: "{{ github_runner_checksum }}"
+        mode: "0644"
 
     - name: Extract GitHub Actions Runner
       ansible.builtin.unarchive:
