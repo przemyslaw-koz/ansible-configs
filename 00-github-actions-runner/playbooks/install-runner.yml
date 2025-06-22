@@ -51,7 +51,7 @@
     - name: Install GitHub Actions Runner as Systemd Service
       args:
         chdir: "{{ github_runner_dir }}"
-      command: ./svc.sh install
+      ansible.builtin.command: ./svc.sh install
       when: not runner_service_exists.stat.exists
 
     - name: Start GitHub Actions Runner Service
