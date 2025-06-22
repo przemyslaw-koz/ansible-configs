@@ -60,7 +60,7 @@
         dest: /usr/share/nginx/html/index.html
         mode: '0644'
 
-    - name: Restart Nginx
+    - name: Restart Nginx with Flush Handler
       ansible.builtin.meta: flush_handlers
 
     - name: "Check it! 'https://localhost:443/index.html"
