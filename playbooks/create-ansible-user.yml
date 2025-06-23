@@ -6,7 +6,7 @@
       ansible.builtin.user:
         name: ansiblebot
         shell: /bin/bash
-        groups: [ "sudo", "docker" ]
+        groups: ["sudo", "docker"]
         append: true
         state: present
 
