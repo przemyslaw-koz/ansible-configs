@@ -13,7 +13,7 @@
     - name: Add SSH key for 'ansiblebot'
       ansible.posix.authorized_key:
         user: ansiblebot
-        key: "{{ lookup('file', '../ansible_node1hp_key.pub') }}"
+        key: "{{ lookup('file', playbook_dir + '/../files/ansible_node1hp_key.pub') }}"
 
     - name: Allow paswordless sudo for 'ansiblebot'
       ansible.builtin.copy:
