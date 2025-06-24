@@ -11,6 +11,7 @@ RUN mkdir /var/run/sshd
 RUN mkdir -p /home/ansiblebot/.ssh
 
 COPY authorized_keys /home/ansiblebot/.ssh/authorized_keys
+COPY ../files/example.fact /etc/ansible/facts.d/example.fact
 
 RUN chown -R ansiblebot:ansiblebot /home/ansiblebot/.ssh && \
     chmod 700 /home/ansiblebot/.ssh && \
