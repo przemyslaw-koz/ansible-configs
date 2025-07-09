@@ -1,0 +1,67 @@
+- name: Install and Configure Cloudflared
+  hosts: hpnodes
+  become: true
+
+  vars:
+    cloudflared_version: "2024.6.0"
+    clouflared_url: "https://github.com/cloudflare/cloudflared/releases/download/2024.6.0/cloudflared-linux-amd64.deb"
+
+  tasks:
+    - name: Ensure /etc/cloudflared/ exists
+      ansible.builtin.file:
+        path: /etc/cloudflared
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Download Cloudflared
+      ansible.builtin.get_url:
+        path: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb"
+        dest: /tmp/cloudflared.deb
+
+    - name: Install Cloudflared
+      ansible.builtin.apt:
+        deb: /tmp/cloudflared.deb
+        state: present
+
+    - name: Copy config.yml
+      copy:
+        src: files/config.yml
+        dest: /etc/cloudflared/config.yml
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Copy Credentials File
+      copy:
+        scr: files/{{ tunnel_id }}.json
+        dest: /etc/cloudflared/{{ tunnel_id }}.json
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: Ensure systemd Service Exists
+      copy:
+        dest: /etc/systemd/system/cloudflared.service
+        content: |
+          [Unit]
+          Description=Cloudflare Tunnel
+          After=network.target
+
+          [Service]
+          TimeoutStartSec=0
+          Type=simple
+          ExecStart=/usr/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload System
+      command: systemctl daemon-reexec
+
+    - name: Enable Cloudflared at Boot
+      systemd:
+        name: cloudflared
+        enabled: true
+        state: started
