@@ -7,5 +7,6 @@
       ansible.builtin.service_facts:
 
     - name: Debug
-      ansible.buildin.debug: var=ansible_facts.services.ssh
+      ansible.builtin.debug:
+        var: ansible_facts.services.ssh
 ...
