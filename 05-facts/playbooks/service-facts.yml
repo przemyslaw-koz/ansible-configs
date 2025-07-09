@@ -4,7 +4,8 @@
   gather_facts: false
   tasks:
     - name: Gathering services facts
-      service_facts:
+      ansible.builtin.service_facts:
 
-    - debug: var=ansible_facts.services.ssh
+    - name: Debug
+      ansible.buildin.debug: var=ansible_facts.services.ssh
 ...
