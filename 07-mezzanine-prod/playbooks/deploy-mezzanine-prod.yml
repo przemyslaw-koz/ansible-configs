@@ -92,20 +92,20 @@
 
     - name: Configure Project's Regional Settings
       become: true
-      locale_gen:
+      community.general.locale_gen:
         name: "{{ locale }}"
 
     - name: Create Database User
       become: true
       become_user: postgres
-      postgresql_user:
+      community.postgresql.postgresql_user:
         name: "{{ database_user }}"
         password: "{{ db_pass }}"
 
     - name: Create Database
       become: true
       become_user: postgres
-      postgresql_db:
+      community.postgresql.postgresql_db:
         name: "{{ database_name }}"
         owner: "{{ database_user }}"
         encoding?: UTF8
@@ -122,7 +122,7 @@
 
     - name: Create TLS certs
       become: true
-      command: >
+      ansible.builtin.command: >
         openssl req -new -x509 -nodes -out {{ proj_name }}.crt
         -keyout {{ proj_name }}.key -subj '/CN={{ domains[0] }}' -days 365
       args:
@@ -143,6 +143,7 @@
       ansible.builtin.template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/sites-available/mezzanine.conf
+        mode?: "0777"
       notify: Restart Nginx Server
 
     - name: Activate Nginx config file
@@ -182,7 +183,7 @@
         mode: "0750"
 
     - name: Migration to create DB, gathering static data
-      django_manage:
+      community.general.django_manage:
         command: "{{ item }}"
         app_path: "{{ proj_path }}"
         virtual_env: "{{ venv_path }}"
@@ -191,7 +192,7 @@
         - collectstatic
 
     - name: Set Site
-      script: scripts/setsite.py
+      ansible.builtin.script: scripts/setsite.py
       environment:
         PATH: "{{ venv_path }}/bin"
         PROJECT_DIR: "{{ proj_path }}"
