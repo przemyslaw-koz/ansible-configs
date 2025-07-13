@@ -201,7 +201,7 @@
         WEBSITE_DOMAIN: "{{ live_hostname }}"
 
     - name: Set admin password
-      script: scripts/setaddmin.py
+      ansible.builtin.script: scripts/setaddmin.py
       environment:
         PATH: "{{ venv_path }}/bin"
         PROJECT_DIR: "{{ proj_path }}"
@@ -211,13 +211,13 @@
   handlers:
     - name: Restart Supervisor Manager
       become: true
-      supervisorctl:
+      community.general.supervisorctl:
         name: "{{ gunicorn_procname }}"
         state: restarted
 
     - name: Restart Nginx Server
       become: true
-      service:
+      ansible.builtin.service:
         name: nginx
         state: restarted
 
