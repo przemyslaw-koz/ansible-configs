@@ -21,25 +21,18 @@ This directory contains Ansible playbooks and inventory configuration for deploy
 
 ## 🔧 What It Does
 This playbook:
-
-Installs the cloudflared binary
-
-Creates required folders and places configuration files
-
-Installs a systemd service to start the tunnel at boot
-
-Ensures the tunnel is running and connected
+- Installs the cloudflared binary
+- Creates required folders and places configuration files
+- Installs a systemd service to start the tunnel at boot
+- Ensures the tunnel is running and connected
 
 Used to expose a private Umami analytics service to the internet via monitoring.codemining.dev.
 
 ## 🚀 How to Use
 Make sure you have:
-
-Valid cloudflared config.yml and credentials-file in files/
-
-SSH access to your target machine
-
-Docker already installed on the target (required for Umami stack)
+- Valid cloudflared config.yml and credentials-file in files/
+- SSH access to your target machine
+- Docker already installed on the target (required for Umami stack)
 
 Then run:
 ```bash
