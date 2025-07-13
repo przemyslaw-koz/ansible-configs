@@ -143,7 +143,7 @@
       ansible.builtin.template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/sites-available/mezzanine.conf
-        mode?: "0777"
+        mode: "0777"
       notify: Restart Nginx Server
 
     - name: Activate Nginx config file
