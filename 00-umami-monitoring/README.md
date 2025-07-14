@@ -6,16 +6,17 @@ This directory contains Ansible playbooks and inventory configuration for deploy
 
 ```bash
 00-umami-monitoring/
-├── ansible.cfg                    # Ansible config
-├── inventory/
-│   ├── hosts.ini                  # Inventory file (with [hpnodes] group)
-│   └── host_vars/
-│       └── node1hp.yml           # Per-host variables (e.g. tunnel_id)
-├── playbooks/
-│   └── configure-cloudflared.yml # Cloudflare Tunnel playbook
-├── files/
-│   ├── config.yml                # cloudflared config
-│   └── credentials.json         # Cloudflare credentials file
+├── ansible.cfg
+├── inventory
+│   ├── hosts.ini
+│   └── host_vars
+│       └── node1hp.yml
+├── playbooks
+│   ├── configure-cloudflared.yml
+│   ├── files
+│   │   └── credentials.json
+│   └── templates
+│       └── config.yml.j2
 └── README.md
 ```
 
