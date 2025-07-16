@@ -1,0 +1,5 @@
+- name: Install GitHub Actions Runner
+  hosts: hpnodes
+  become: true
+  roles:
+    - github-actions-runner

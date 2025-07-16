@@ -1,0 +1,6 @@
+- name: Install and Configure Cloudflared
+  hosts: hpnodes
+  become: true
+  roles:
+    - cloudflared-config
+

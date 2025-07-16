@@ -1,0 +1,5 @@
+- name: Running Docker Container with Samba Server on HP Thin Client
+  hosts: hpnodes
+  become: true
+  roles:
+    - samba
