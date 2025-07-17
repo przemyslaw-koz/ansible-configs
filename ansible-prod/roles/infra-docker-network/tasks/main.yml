@@ -1,0 +1,6 @@
+---
+- name: Ensure infra-net Docker network exists
+  community.docker.docker_network:
+    name: infra-net
+    driver: bridge
+    state: present
