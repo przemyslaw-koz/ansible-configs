@@ -1,2 +1,7 @@
 - name: Configure Infrastructure - Postgres DB and services
+  hosts: hpnodes
+  become: true
+  roles:
+    - postgres-init
+    - infra-docker-network
 

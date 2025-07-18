@@ -1,2 +1,14 @@
 ---
-# tasks file for roles/postgres-init
+- name: Ensure Postgresql users exist
+  community.postgresql.postgresql_user:
+    name: "{{ item.user }}"
+    password: "{{ item.password }}"
+    role_attr_flags: CREATEDB, LOGIN
+  loop: "{{ postgres_db_users }}"
+
+- name: Ensure Postgresql databases exist
+  community.postgresql.postgresql_db:
+    name: "{{ item.name }}"
+    owner: "{{ item.user }}"
+  loop: "{{ postgres_db_users }}"
+...

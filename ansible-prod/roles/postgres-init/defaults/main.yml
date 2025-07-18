@@ -1,2 +1,8 @@
 ---
-# defaults file for roles/postgres-init
+postgres_db_users:
+  - name: umami
+    user: umami
+    password: "{{ umami_password }}"
+  - name: wallabag
+    user: wallabag
+    password: "{{ wallabag_password }}"
