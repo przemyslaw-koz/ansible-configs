@@ -26,9 +26,11 @@ jobs:
           pip install ansible ansible-lint
 
       - name: Run ansible-lint on all playbooks
+        wrking-directory: ansible-prod
         run: |
-          find . -type f -path "*/playbooks/*.yml" -exec ansible-lint {} +
+          ansible-lint -v playbooks/*.yml
 
       - name: Run ansible-playbook syntax-check on all playbooks
+        working-directory: ansible-prod
         run: |
-          find . -type f -path "*/playbooks/*.yml" -exec ansible-playbook --syntax-check {} +
+          ansible-playbook -i inventory/hosts.ini --syntax-check playbooks/*.yml
