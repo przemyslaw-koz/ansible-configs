@@ -1,5 +1,4 @@
 ---
 cloudflared_version: "2024.6.0"
 cloudflared_url: "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb"
-tunnel_id: "overwrite-in-host_vars" 
-
+tunnel_id: "overwrite-in-host_vars"
