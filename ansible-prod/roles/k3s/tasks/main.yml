@@ -5,7 +5,7 @@
     state: present
 
 - name: Download k3s install script
-  ansible.builtin.get_utl:
+  ansible.builtin.get_url:
     url: "{{ k3s_install_script_url }}"
     dest: /tmp/k3s-install.sh
     mode: "0775"
