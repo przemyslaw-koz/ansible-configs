@@ -4,9 +4,16 @@
     name: curl
     state: present
 
-- name: Download and install k3s
-  ansible.builtin.shell: |
-    curl -sfL {{ k3s_install_script_url }} | INSTALL_K3S_VERSION={{ k3s_version }} sh -s - {{ k3s_server_args }}
+- name: Download k3s install script
+  ansible.builtin.get_utl:
+    url: "{{ k3s_install_script_url }}"
+    dest: /tmp/k3s-install.sh
+    mode: "0775"
+
+- name: Install k3s
+  ansible.builtin.command: "/tmp/k3s-install.sh -- {{ k3s_server_args }}"
+  environment:
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
   args:
     creates: /usr/local/bin/k3s
 
