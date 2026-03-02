@@ -60,4 +60,3 @@
     name: cloudflared
     enabled: true
     state: started
-
