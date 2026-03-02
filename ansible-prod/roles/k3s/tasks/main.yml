@@ -5,16 +5,14 @@
     state: present
 
 - name: Download and install k3s
-  shell: |
+  ansible.builtin.shell: |
     curl -sfL {{ k3s_install_script_url }} | INSTALL_K3S_VERSION={{ k3s_version }} sh -s - {{ k3s_server_args }}
   args:
     creates: /usr/local/bin/k3s
 
-- name: Wait for K3S Service to be active
+- name: Start K3S Service
   become: true
   ansible.builtin.systemd:
     name: k3s
     state: started
     enabled: true
-
-...
