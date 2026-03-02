@@ -1,6 +1,6 @@
 ---
 - name: Install K3S on thinclient
-  hosts:
+  hosts: hpnodes
   become: true
   roles:
     - k3s
