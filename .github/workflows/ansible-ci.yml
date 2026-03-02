@@ -3,8 +3,18 @@ name: Ansible CI
 on:
   push:
     branches: ["main"]
+    paths:
+      - "ansible-prod/**"
+      - ".github/workflows/ansible-ci.yml"
   pull_request:
     branches: ["main"]
+    paths:
+      - "ansible-prod/**"
+      - ".github/workflows/ansible-ci.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progess: true
 
 jobs:
   ansible-checks:
