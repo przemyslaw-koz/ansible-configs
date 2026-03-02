@@ -26,7 +26,7 @@ jobs:
           pip install ansible ansible-lint
 
       - name: Run ansible-lint on all playbooks
-        wrking-directory: ansible-prod
+        working-directory: ansible-prod
         run: |
           ansible-lint -v playbooks/*.yml
 
