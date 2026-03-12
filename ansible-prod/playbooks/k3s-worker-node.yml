@@ -1,0 +1,11 @@
+---
+- name: Configure K3S worker nodes
+  hosts: hpnodes-workers
+  become: true
+  roles:
+    - python
+    - base-system
+    - shell-tools
+    - monitoring-debug-tools
+    - network-tools
+    - postgres-client
