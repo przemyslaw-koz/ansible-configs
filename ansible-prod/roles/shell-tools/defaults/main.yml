@@ -1,7 +1,7 @@
 ---
 shell_tools:
   - tmux
-  - bt
+  - bat
   - jq
   - ripgrep
   - fd-find
