@@ -1,2 +1,6 @@
 ---
-# tasks file for postgres-client
+- name: Installing psql client
+  ansible.builtin.apt:
+    - postgresql-client
+    - postgresql-client-common
+    - python3-psycopg2

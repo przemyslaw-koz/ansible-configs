@@ -1,2 +1,10 @@
 ---
-# tasks file for monitoring-debug-tools
+- name: Install monitoring and debug tools
+  ansible.builtin.apt:
+    pkg:
+      - htop
+      - btop
+      - iotop
+      - ncdu
+      - lsof
+      - strace

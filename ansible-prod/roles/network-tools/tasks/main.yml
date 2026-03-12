@@ -1,2 +1,9 @@
 ---
-# tasks file for network-tools
+- name: Installing network tools
+  ansible.builtin.apt:
+    pkg:
+      - iperf3
+      - net-tools
+      - dnsutils
+      - traceroute
+      - tcpdump
