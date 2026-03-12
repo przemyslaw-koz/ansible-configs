@@ -1,2 +1,5 @@
 ---
-# defaults file for postgres-client
+postgres_client_packages:
+  - postgresql-client
+  - postgresql-client-common
+  - python3-psycopg2

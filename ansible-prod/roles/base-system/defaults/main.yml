@@ -1,2 +1,13 @@
 ---
-# defaults file for base-system
+base_system_packages:
+  - ca-certificates
+  - curl
+  - dos2unix
+  - gnupg
+  - openssh-server
+  - rename
+  - tree
+  - git 
+  - rsync
+  - unzip
+  - zip
