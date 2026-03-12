@@ -4,8 +4,8 @@
   become: true
   roles:
     - python
-    - base-system
-    - shell-tools
-    - monitoring-debug-tools
-    - network-tools
-    - postgres-client
+    - base_system
+    - shell_tools
+    - monitoring_debug_tools
+    - network_tools
+    - postgres_client
