@@ -1,6 +1,6 @@
 ---
 - name: Configure K3S worker nodes
-  hosts: hpnodes_workers
+  hosts: hpnodes
   become: true
   roles:
     - python
