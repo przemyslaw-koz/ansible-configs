@@ -1,9 +1,5 @@
 ---
 - name: Install shell tools
   ansible.builtin.apt:
-    pkg:
-      - tmux
-      - bt
-      - jq
-      - ripgrep
-      - fd-find
+    name: "{{ shell_tools }}"
+    state: present
