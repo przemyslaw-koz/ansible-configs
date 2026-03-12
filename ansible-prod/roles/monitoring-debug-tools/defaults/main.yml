@@ -1,2 +1,8 @@
 ---
-# defaults file for monitoring-debug-tools
+monitoring_debug_tools:
+  - htop
+  - btop
+  - iotop
+  - ncdu
+  - lsof
+  - strace
