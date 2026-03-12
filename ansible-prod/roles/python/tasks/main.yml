@@ -1,6 +1,5 @@
 ---
 - name: Install python3 packages
   ansible.builtin.apt:
-    pkg:
-      - python3
-      - python3-apt
+    name: "{{ python_packages }}"
+    state: present

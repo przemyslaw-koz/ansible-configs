@@ -1,2 +1,4 @@
 ---
-# defaults file for python
+python_packages:
+  - python3
+  - python3-apt
