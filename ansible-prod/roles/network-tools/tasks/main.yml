@@ -1,9 +1,5 @@
 ---
 - name: Installing network tools
   ansible.builtin.apt:
-    pkg:
-      - iperf3
-      - net-tools
-      - dnsutils
-      - traceroute
-      - tcpdump
+    name: "{{ network_tools }}"
+    state: present

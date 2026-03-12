@@ -1,2 +1,7 @@
 ---
-# defaults file for network-tools
+network_tools:
+  - iperf3
+  - net-tools
+  - dnsutils
+  - traceroute
+  - tcpdump
