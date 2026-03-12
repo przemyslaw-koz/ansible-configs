@@ -7,7 +7,7 @@ base_system_packages:
   - openssh-server
   - rename
   - tree
-  - git 
+  - git
   - rsync
   - unzip
   - zip
