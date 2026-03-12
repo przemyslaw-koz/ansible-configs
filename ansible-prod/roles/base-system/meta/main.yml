@@ -1,0 +1,7 @@
+galaxy_info:
+  author: Przemysław Kozłowski
+  description: Base system and administration packages
+  license: MIT
+  min_ansible_version: 2.1
+  galaxy_tags: []
+dependencies: []
