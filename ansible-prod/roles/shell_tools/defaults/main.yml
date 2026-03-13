@@ -5,3 +5,4 @@ shell_tools:
   - jq
   - ripgrep
   - fd-find
+  - vim
