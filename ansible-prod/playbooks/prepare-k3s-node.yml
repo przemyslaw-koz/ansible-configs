@@ -9,3 +9,4 @@
     - monitoring_debug_tools
     - network_tools
     - postgres_client
+    - k3s_prereqs
