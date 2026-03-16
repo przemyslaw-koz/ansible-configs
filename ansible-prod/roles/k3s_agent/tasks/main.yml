@@ -1,2 +1,55 @@
 ---
-# tasks file for k3s-agent
+- name: Ensure curl is installed
+  ansible.builtin.apt:
+    name: 
+      - curl
+    state: present
+
+- name: Make sure   k3s config directory exists
+  ansible.builtin.file:
+    path: /etc/rancher/k3s
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Render k3s agent config
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Restart k3s agent
+
+- name: Download k3s install script
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: /usr/local/src/k3s-install.sh
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Check if k3s agent service exists
+  ansible.builtin.stat:
+    path: /etc/systemd/k3s-agent.service
+  register: k3s_agent_service
+
+- name: Install k3s agent
+  ansible.builtin.command:
+    cmd: /usr/local/src/k3s-install.sh
+  environment:
+    INSTALL_K3S_EXEC: "agent"
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
+  when: not k3s_agent_service.stat.exists
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: not k3s_agent_service.stat.exists
+
+- name: Enable and start k3s agent
+  ansible.builtin.systemd:
+    name: k3s-agent
+    enabled: true
+    state: started
