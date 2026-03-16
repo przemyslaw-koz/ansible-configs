@@ -32,7 +32,7 @@
 
 - name: Check if k3s agent service exists
   ansible.builtin.stat:
-    path: /etc/systemd/k3s-agent.service
+    path: /etc/systemd/system/k3s-agent.service
   register: k3s_agent_service
 
 - name: Install k3s agent
