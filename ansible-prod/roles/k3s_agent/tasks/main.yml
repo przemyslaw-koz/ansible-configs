@@ -10,7 +10,7 @@
       - k3s_token | length > 0
     fail_msg: "k3s_version, k3s_server_url and k3s_token must be explicitly defined."
 
-- name: Make sure   k3s config directory exists
+- name: Make sure k3s config dir exists
   ansible.builtin.file:
     path: /etc/rancher/k3s
     state: directory
