@@ -1,4 +1,15 @@
 ---
+- name: Validate required k3s variables
+  ansible.builtin.assert:
+    that:
+      - k3s_version is defined
+      - k3s_version | length > 0
+      - k3s_server_url is defined
+      - k3s_server_url | length > 0
+      - k3s_token is defined
+      - k3s_token | length > 0
+    fail_msg: "k3s_version, k3s_server_url and k3s_token must be explicitly defined."
+
 - name: Make sure   k3s config directory exists
   ansible.builtin.file:
     path: /etc/rancher/k3s
